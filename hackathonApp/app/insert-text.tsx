@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { Link } from "expo-router";
 
 const CATEGORY = ["Science", "Math", "History", "Art", "Literature"];
 
@@ -61,9 +62,17 @@ const InsertText = () => {
           style={styles.input}
         />
       </View>
-      <Pressable style={styles.search}>
-        <Text style={styles.searchText}>SEARCH</Text>
-      </Pressable>
+      <Link
+        href={{
+          pathname: "/result/",
+          params: { input: inputText },
+        }}
+        asChild
+      >
+        <Pressable style={styles.search}>
+          <Text style={styles.searchText}>SEARCH</Text>
+        </Pressable>
+      </Link>
     </KeyboardAvoidingView>
   );
 };
