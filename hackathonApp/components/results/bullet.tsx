@@ -33,6 +33,7 @@ const DATA = [
 
 interface BulletProps {
   scroll: (x: number) => void;
+  result?: { title: string; description: string }[];
 }
 
 interface RenderBulletProps {
@@ -74,6 +75,7 @@ const RenderBullet = ({
 const Bullet = ({ scroll }: BulletProps) => {
   const [active, setActive] = useState(false);
   const [piece, setPiece] = useState(0);
+  const [data, setData] = useState(DATA);
 
   const scrollTo = () => {
     scroll(windowWidth);
@@ -87,6 +89,30 @@ const Bullet = ({ scroll }: BulletProps) => {
     }
   }, [piece]);
 
+  useEffect(() => {
+    const sendData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/get-bullet1/?query=${encodeURIComponent(
+            "What is the capital of France?"
+          )}`,
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        );
+        const json = await response.json();
+        console.log(json);
+        setData(json);
+      } catch (error) {
+        console.error("Failed to fetch:", error);
+      }
+    };
+    sendData();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Header
@@ -94,7 +120,7 @@ const Bullet = ({ scroll }: BulletProps) => {
         subtitle={"Train your knowledge with our curated propositions."}
       />
       <FlatList
-        data={DATA}
+        data={data ? data : DATA}
         renderItem={({ item }) => (
           <RenderBullet
             title={item.title}

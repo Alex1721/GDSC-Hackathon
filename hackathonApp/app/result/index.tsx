@@ -4,7 +4,7 @@ import {
   StyleSheet,
   _ScrollView,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import Bullet from "@/components/results/bullet";
 import Test from "@/components/results/test";
@@ -21,31 +21,32 @@ const Result = () => {
     });
   };
 
-  const [result, setResult] = React.useState("");
-
   const params = useLocalSearchParams();
   const input = params.input as string;
 
-  const handlePress = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/get-data/?input_value=${encodeURIComponent(
-          input
-        )}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-      const json = await response.json();
-      setResult(json.result);
-    } catch (error) {
-      console.error("Failed to fetch:", error);
-      setResult("Failed to connect to the server.");
-    }
-  };
+  useEffect(() => {
+    const sendData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/get-bullet1/?query=${encodeURIComponent(
+            "What is the capital of France?"
+          )}`,
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        );
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        console.error("Failed to fetch:", error);
+      }
+    };
+    sendData();
+  }, []);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView

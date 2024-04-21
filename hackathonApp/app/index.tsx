@@ -1,5 +1,5 @@
 import { Text, View, SafeAreaView, StyleSheet, Pressable } from "react-native";
-import { Link, useLocalSearchParams } from "expo-router";
+import { Link } from "expo-router";
 import React from "react";
 
 import Header from "@/components/header";

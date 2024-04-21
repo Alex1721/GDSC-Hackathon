@@ -54,6 +54,7 @@ function RootLayoutNav() {
       }}
     >
       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="result/index" options={{ headerShown: false }} />
       <Stack.Screen
         name="insert-text"
         options={{
