@@ -104,14 +104,30 @@ const Bullet = ({ scroll }: BulletProps) => {
           }
         );
         const json = await response.json();
-        console.log(json);
-        setData(json);
+        console.log("problème", json.title1);
+
+        setData([
+          {
+            title: json.title1,
+            description: json.description1,
+          },
+          {
+            title: json.title2,
+            description: json.description2,
+          },
+          {
+            title: json.title3,
+            description: json.description3,
+          },
+        ]);
       } catch (error) {
         console.error("Failed to fetch:", error);
       }
     };
     sendData();
   }, []);
+
+  console.log(data);
 
   return (
     <View style={styles.container}>

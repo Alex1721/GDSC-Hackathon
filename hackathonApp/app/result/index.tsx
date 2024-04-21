@@ -24,29 +24,6 @@ const Result = () => {
   const params = useLocalSearchParams();
   const input = params.input as string;
 
-  useEffect(() => {
-    const sendData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8000/get-bullet1/?query=${encodeURIComponent(
-            "What is the capital of France?"
-          )}`,
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-            },
-          }
-        );
-        const json = await response.json();
-        console.log(json);
-      } catch (error) {
-        console.error("Failed to fetch:", error);
-      }
-    };
-    sendData();
-  }, []);
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView

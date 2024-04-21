@@ -176,7 +176,19 @@ def parse_bullet_answer(answer):
 
     json_string = json.dumps(listDics)
 
-    return json_string
+    dicto = {
+        "title1" : titles[0],
+        "description1" : titles[1],
+        "title2" : titles[2],
+        "description2" : titles[3],
+        "title3" : titles[4],
+        "description3" : titles[5],
+    }
+
+    json_string = json.dumps(dicto)
+
+
+    return dicto
 
 
 def parse_QA_answer(answer):
@@ -230,7 +242,8 @@ def parse_QA_answer(answer):
         dict['incorrect'] = [titles[4*i + 2], titles[4*i + 3]]
         listDics.append(dict)
 
-    json_string = json.dumps(listDics)
+
+    json_string = json.dumps(dicto)
     return json_string
 
 def parse_summary_answer(answer):
