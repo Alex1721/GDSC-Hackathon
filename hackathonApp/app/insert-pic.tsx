@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { Link } from "expo-router";
 
 const InsertPic = () => {
   const [inputText, setInputText] = useState("");
@@ -33,9 +34,17 @@ const InsertPic = () => {
           style={styles.input}
         />
       </View>
-      <Pressable style={styles.search}>
-        <Text style={styles.searchText}>SEARCH</Text>
-      </Pressable>
+      <Link
+        href={{
+          pathname: "/result/",
+          params: { input: inputText },
+        }}
+        asChild
+      >
+        <Pressable style={styles.search}>
+          <Text style={styles.searchText}>SEARCH</Text>
+        </Pressable>
+      </Link>
     </KeyboardAvoidingView>
   );
 };

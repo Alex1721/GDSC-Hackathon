@@ -91,7 +91,7 @@ const Test = ({ scroll }: BulletProps) => {
   const [piece, setPiece] = useState(0);
 
   const scrollTo = () => {
-    scroll(windowWidth);
+    scroll(windowWidth * 2);
   };
 
   useEffect(() => {

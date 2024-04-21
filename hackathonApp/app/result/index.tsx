@@ -4,11 +4,12 @@ import {
   StyleSheet,
   _ScrollView,
 } from "react-native";
-import React, { useEffect, useRef } from "react";
+import { useLocalSearchParams } from "expo-router";
+import React, { useRef } from "react";
 
 import Bullet from "@/components/results/bullet";
 import Test from "@/components/results/test";
-import { useLocalSearchParams } from "expo-router";
+import Summary from "@/components/results/summary";
 
 const Result = () => {
   const _ScrollView = useRef<ScrollView>(null);
@@ -31,6 +32,7 @@ const Result = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
       >
+        <Summary input={input} />
         <Bullet scroll={scrollTo} />
         <Test scroll={scrollTo} />
       </ScrollView>
