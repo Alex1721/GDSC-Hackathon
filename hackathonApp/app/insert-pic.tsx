@@ -7,13 +7,41 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
+import * as ImagePicker from "expo-image-picker";
 import { Link } from "expo-router";
+
+import ImageViewer from "../components/imageViewer";
+
+const PlaceholderImage = require("@/assets/images/gradient.png");
 
 const InsertPic = () => {
   const [inputText, setInputText] = useState("");
-  const [category, setCategory] = useState("Science");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [icon, setIcon] = useState<"plus" | "close">("plus");
+
+  const pickImageAsync = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    } else {
+      alert("You did not select any image");
+    }
+  };
+
+  const handleImage = () => {
+    if (selectedImage) {
+      setSelectedImage(null);
+      setIcon("plus");
+    } else {
+      pickImageAsync();
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -21,9 +49,16 @@ const InsertPic = () => {
       keyboardVerticalOffset={80}
       style={styles.container}
     >
-      <Pressable style={{ alignItems: "center" }}>
-        <Ionicons name="add-circle" size={90} color="#314053" />
-      </Pressable>
+      <View style={{ alignSelf: "center" }}>
+        <Pressable style={{ alignItems: "center" }} onPress={handleImage}>
+          <ImageViewer
+            placeholderImage={PlaceholderImage}
+            selectedImage={selectedImage}
+          />
+          <AntDesign name={icon} size={24} color={"#314053"} />
+        </Pressable>
+      </View>
+
       <View style={{ gap: 5, flex: 1 }}>
         <Text style={{ fontSize: 24, paddingLeft: 5 }}>Add a question</Text>
         <TextInput
