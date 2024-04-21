@@ -1,7 +1,9 @@
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Link, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { Pressable, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -46,10 +48,46 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerShown: true,
+      }}
+    >
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="insert-text" options={{ headerShown: true }} />
-      <Stack.Screen name="result" options={{ headerShown: true }} />
+      <Stack.Screen
+        name="insert-text"
+        options={{
+          headerTitle: () => {
+            return <Text style={{ fontSize: 20 }}>Let's start</Text>;
+          },
+          headerLeft: () => {
+            return (
+              <Link href={"/"} asChild>
+                <Pressable>
+                  <Ionicons name="arrow-back" size={24} color="black" />
+                </Pressable>
+              </Link>
+            );
+          },
+        }}
+      />
+      <Stack.Screen
+        name="insert-pic"
+        options={{
+          headerTitle: () => {
+            return <Text style={{ fontSize: 20 }}>Upload file</Text>;
+          },
+          headerLeft: () => {
+            return (
+              <Link href={"/"} asChild>
+                <Pressable>
+                  <Ionicons name="arrow-back" size={24} color="black" />
+                </Pressable>
+              </Link>
+            );
+          },
+        }}
+      />
     </Stack>
   );
 }

@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header = ({ title, subtitle }: HeaderProps) => {
   return (
-    <View>
+    <View style={{ paddingLeft: 5 }}>
       <Text style={{ fontFamily: "niv-b", fontSize: 30 }}>{title}</Text>
       <Text>{subtitle}</Text>
     </View>

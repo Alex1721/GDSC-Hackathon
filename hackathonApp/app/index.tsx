@@ -5,6 +5,7 @@ import React from "react";
 import Header from "@/components/header";
 
 const Home = () => {
+  const [text, setText] = React.useState("");
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <View style={styles.container}>
